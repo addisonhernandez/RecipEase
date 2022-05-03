@@ -16,43 +16,47 @@ export default function Home() {
         <h1 className={styles.title}>
           Welcome to{' '}
           <Link href="/">
-            <a>RecipEase!</a>
+            <a>RecipEase</a>
           </Link>
         </h1>
 
         <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
+          Get started by updating the contents of your pantry!
         </p>
 
         <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+          <Link href="/recipes">
+            <a className={styles.card}>
+              <h2>Recipes &rarr;</h2>
+              <p>Explore the catalogue of recipes.</p>
+            </a>
+          </Link>
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
+          <Link href="/pantry">
+            <a className={styles.card}>
+              <h2>Pantry &rarr;</h2>
+              <p>View or update your food stores.</p>
+            </a>
+          </Link>
 
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
+          <Link href="/planner">
+            <a className={styles.card}>
+              <h2>Meal Plan &rarr;</h2>
+              <p>Plan a week of meals and generate a shopping list.</p>
+            </a>
+          </Link>
 
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+          {/* <Link href="/">
+            <a
+              href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+              className={styles.card}
+            >
+              <h2>Deploy &rarr;</h2>
+              <p>
+                Instantly deploy your Next.js site to a public URL with Vercel.
+              </p>
+            </a>
+          </Link> */}
         </div>
       </main>
 
