@@ -3,32 +3,6 @@ import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 
 export default function pantry({ groceries }) {
-  // TESTING
-  if (!groceries) {
-    groceries = [
-      {
-        _id: 1,
-        date_added: Date.now(),
-        expiration: Date.now() + 5,
-        name: 'Milk',
-        quantity: {
-          amount: 1,
-          unit: 'gal',
-        },
-      },
-      {
-        _id: 2,
-        date_added: Date.now(),
-        expiration: Date.now() + 5,
-        name: 'Eggs',
-        quantity: {
-          amount: 1,
-          unit: 'dozen',
-        },
-      },
-    ];
-  }
-
   return (
     <>
       {/* Create an entry for each item */}
@@ -53,4 +27,36 @@ export default function pantry({ groceries }) {
       <button type="button">Add an item</button>
     </>
   );
+}
+
+export async function getStaticProps() {
+  // FIXME: Testing only
+  const groceries = [
+    {
+      _id: 1,
+      date_added: Date.now(),
+      expiration: Date.now() + 5,
+      name: 'Milk',
+      quantity: {
+        amount: 1,
+        unit: 'gal',
+      },
+    },
+    {
+      _id: 2,
+      date_added: Date.now(),
+      expiration: Date.now() + 5,
+      name: 'Eggs',
+      quantity: {
+        amount: 1,
+        unit: 'dozen',
+      },
+    },
+  ];
+
+  return {
+    props: {
+      groceries,
+    },
+  };
 }
