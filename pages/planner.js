@@ -1,10 +1,19 @@
 import { useRef, useState } from 'react';
 
 export default function planner() {
-  return <div>planner</div>;
+  return (
+    <>
+      <div>
+        <h1 className="m-0 text-6xl text-center mt-4">Meal Plan</h1>
+      </div>
+      <div className='grid grid-cols-2 gap-4 mx-8'>
+        <WeekForm />
+      </div>
+    </>
+  );
 }
 
-const WeekForm = () => {
+const WeekForm = ({ setMealChoices }) => {
   const formRef = useRef();
 
   const [monday, setMonday] = useState('');
@@ -15,16 +24,13 @@ const WeekForm = () => {
   const [saturday, setSaturday] = useState('');
   const [sunday, setSunday] = useState('');
 
-  const handleSubmit = () => {};
-
   return (
-    <form ref={formRef}>
+    <form ref={formRef} className="flex flex-col gap-2">
       <label>
         <input
           type="text"
           placeholder="Monday"
           onChange={(e) => setMonday(e.target.value)}
-          required
         />
       </label>
       <label>
@@ -32,7 +38,6 @@ const WeekForm = () => {
           type="text"
           placeholder="Tuesday"
           onChange={(e) => setTuesday(e.target.value)}
-          required
         />
       </label>
       <label>
@@ -40,7 +45,6 @@ const WeekForm = () => {
           type="text"
           placeholder="Wednesday"
           onChange={(e) => setWednesday(e.target.value)}
-          required
         />
       </label>
       <label>
@@ -48,7 +52,6 @@ const WeekForm = () => {
           type="text"
           placeholder="Thursday"
           onChange={(e) => setThursday(e.target.value)}
-          required
         />
       </label>
       <label>
@@ -56,7 +59,6 @@ const WeekForm = () => {
           type="text"
           placeholder="Friday"
           onChange={(e) => setFriday(e.target.value)}
-          required
         />
       </label>
       <label>
@@ -64,7 +66,6 @@ const WeekForm = () => {
           type="text"
           placeholder="Saturday"
           onChange={(e) => setSaturday(e.target.value)}
-          required
         />
       </label>
       <label>
@@ -72,7 +73,6 @@ const WeekForm = () => {
           type="text"
           placeholder="Sunday"
           onChange={(e) => setSunday(e.target.value)}
-          required
         />
       </label>
     </form>
