@@ -1,32 +1,16 @@
 import moment from 'moment';
 
 import Layout from '../components/layout';
+import PantryItem from '../components/PantryItem';
+
 import dbConnect from '../db';
 import Pantry from '../models/Pantry';
-
-import styles from '../styles/Home.module.css';
 
 export default function pantry({ groceries }) {
   return (
     <Layout>
       {groceries.map((item) => (
-        <div key={item._id}>
-          {/* TODO: Component */}
-          <div className={styles.card}>
-            {/* <Image src={item.image_url} alt={item.name} /> */}
-            <h2>{item.name}</h2>
-            <div>
-              <p>
-                Qty:{' '}
-                <span>{item.quantity.amount}</span>
-                <span>{item.quantity.unit}</span>
-              </p>
-              {/* TODO: moment.js */}
-              <p>Date added: {item.date_added}</p>
-              <p>Expiration: {item.expiration}</p>
-            </div>
-          </div>
-        </div>
+        <PantryItem key={item._id} {...item} />
       ))}
       <button type="button">Add an item</button>
     </Layout>
