@@ -6,22 +6,22 @@ export default function NavBar() {
       <div className="flex flex-auto" />
       <div className="flex flex-auto items-center justify-center">
         <Link href="/">
-          <a>Home</a>
+          <a className="hover:font-bold">Home</a>
         </Link>
       </div>
       <div className="flex flex-auto items-center justify-center">
         <Link href="/recipes">
-          <a>Recipes</a>
+          <a className="hover:font-bold">Recipes</a>
         </Link>
       </div>
       <div className="flex flex-auto items-center justify-center">
         <Link href="/pantry">
-          <a>Pantry</a>
+          <a className="hover:font-bold">Pantry</a>
         </Link>
       </div>
       <div className="flex flex-auto items-center justify-center">
         <Link href="/planner">
-          <a>Meal Plan</a>
+          <a className="hover:font-bold">Meal Plan</a>
         </Link>
       </div>
       <div className="flex flex-auto" />
