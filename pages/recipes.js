@@ -5,13 +5,18 @@ import Recipe from '../models/Recipe';
 
 import styles from '../styles/Home.module.css';
 
-export default function recipes({ recipes }) {
+export default function Recipes({ recipes }) {
   return (
-    <Layout>
-      {recipes.map((recipe) => (
-        <RecipeItem key={recipe._id} {...recipe} />
-      ))}
-    </Layout>
+    <>
+      <div>
+        <h1 className='m-0 text-6xl text-center mt-4'>Recipes</h1>
+      </div>
+      <Layout>
+        {recipes.map((recipe) => (
+          <RecipeItem key={recipe._id} {...recipe} />
+        ))}
+      </Layout>
+    </>
   );
 }
 
@@ -33,7 +38,7 @@ const fetchFromAPI = async function () {
   return (await result.json()).hits;
 };
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   await dbConnect();
 
   const results = await Recipe.aggregate([{ $sample: { size: 10 } }]).exec();
@@ -44,8 +49,6 @@ export async function getServerSideProps() {
 
     return recipe;
   });
-
-  console.log(recipes);
 
   return {
     props: {
