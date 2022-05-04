@@ -8,12 +8,17 @@ import Pantry from '../models/Pantry';
 
 export default function pantry({ groceries }) {
   return (
-    <Layout>
-      {groceries.map((item) => (
-        <PantryItem key={item._id} {...item} />
-      ))}
-      <button type="button">Add an item</button>
-    </Layout>
+    <>
+      <div>
+        <h1 className='m-0 text-6xl text-center mt-4'>Pantry</h1>
+      </div>
+      <Layout>
+        {groceries.map((item) => (
+          <PantryItem key={item._id} {...item} />
+        ))}
+        <button type="button">Add an item</button>
+      </Layout>
+    </>
   );
 }
 
