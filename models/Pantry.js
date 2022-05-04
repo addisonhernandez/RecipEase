@@ -1,20 +1,22 @@
 import mongoose from 'mongoose';
 
 const PantrySchema = new mongoose.Schema({
-  name: {
+  food: {
     type: String,
     required: [true, 'Please provide a name for this item.'],
   },
+  text: String,
   quantity: {
-    amount: {
-      type: Number,
-      required: [true, 'Please provide the amount of this item.'],
-    },
-    unit: {
-      type: String,
-      required: [true, 'Please provide the unit of measurement.'],
-    },
+    type: Number,
+    required: [true, 'Please provide the amount of this item.'],
   },
+  measure: {
+    type: String,
+    required: [true, 'Please provide the unit of measurement.'],
+  },
+  weight: Number,
+  foodCategory: String,
+  Image: String,
   date_added: {
     type: Date,
     default: Date.now,
