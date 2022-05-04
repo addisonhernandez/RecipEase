@@ -7,9 +7,10 @@ export default function RecipeItem({ title, ingredients }) {
       <div>
         <p>Ingredients: </p>
         <ul>
-          {ingredients.map((ingredient) => (
-            <li key={ingredient}>{ingredient}</li>
+          {ingredients.slice(0, 4).map((ingredient) => (
+            <li key={title + ingredient}>{ingredient}</li>
           ))}
+          {ingredients.length >= 4 ? <li>...</li> : null}
         </ul>
       </div>
     </div>
