@@ -2,7 +2,7 @@ import dbConnect from '../../../db';
 import Pantry from '../../../models/Pantry';
 
 export default async function handler(req, res) {
-  const { method } = req;
+  const { body, method } = req;
 
   await dbConnect();
 
@@ -13,7 +13,7 @@ export default async function handler(req, res) {
       break;
 
     case 'POST':
-      const ingredient = await Pantry.create(req.body);
+      const ingredient = await Pantry.create({ ingredient_name: body });
       res.status(201).json({ data: ingredient });
       break;
 
