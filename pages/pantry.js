@@ -4,7 +4,7 @@ import Layout from '../components/layout';
 import PantryItem from '../components/PantryItem';
 
 import dbConnect from '../db';
-import Pantry from '../models/Pantry';
+import Models from '../models';
 
 export default function pantry({ groceries }) {
   return (
@@ -25,7 +25,7 @@ export default function pantry({ groceries }) {
 export async function getServerSideProps() {
   await dbConnect();
 
-  const results = await Pantry.find({});
+  const results = await Models.Pantry.find({});
   const groceries = results.map((doc) => {
     const item = doc.toObject();
 

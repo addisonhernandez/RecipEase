@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Layout from '../components/layout';
 import RecipeItem from '../components/RecipeItem';
 import dbConnect from '../db';
-import Recipe from '../models/Recipe';
+import Models from '../models';
 
 export default function Recipes({ recipes }) {
   const [runtimeRecipes, setRuntimeRecipes] = useState([]);
@@ -58,7 +58,7 @@ const fetchFromAPI = async function () {
 export async function getStaticProps() {
   await dbConnect();
 
-  const results = await Recipe.aggregate([{ $sample: { size: 10 } }]).exec();
+  const results = await Models.Recipe.aggregate([{ $sample: { size: 10 } }]).exec();
 
   const recipes = results.map((recipe) => {
     // fix some weirdness to make fields serializable as JSON
