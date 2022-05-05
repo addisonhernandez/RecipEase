@@ -32,8 +32,6 @@ const WeekForm = ({ mealChoices, setMealChoices }) => {
   const [dayOfWeek, setDayOfWeek] = useState('Monday');
   const [recipeOptions, setRecipeOptions] = useState([]);
 
-  const handleSubmit = () => {};
-
   const searchRecipes = async (query) => {
     if (!query) return;
 
@@ -63,7 +61,7 @@ const WeekForm = ({ mealChoices, setMealChoices }) => {
       <form
         ref={formRef}
         className="flex flex-col gap-2"
-        onSubmit={handleSubmit}
+        onSubmit={(e) => e.preventDefault()}
       >
         <input
           type="text"
