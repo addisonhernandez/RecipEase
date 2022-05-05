@@ -6,7 +6,7 @@ export default function Planner() {
   return (
     <>
       <div>
-        <h1 className="m-0 text-6xl text-center mt-4">Meal Plan</h1>
+        <h1 className="m-0 text-6xl text-center my-4">Meal Plan</h1>
       </div>
       <div className="grid grid-cols-2 gap-4 mx-8">
         <WeekForm mealChoices={mealChoices} setMealChoices={setMealChoices} />
@@ -26,6 +26,7 @@ const daysOfWeek = [
   'Sunday',
 ];
 
+// TODO: Move to component
 const WeekForm = ({ mealChoices, setMealChoices }) => {
   const formRef = useRef();
 
@@ -97,6 +98,7 @@ const WeekForm = ({ mealChoices, setMealChoices }) => {
   );
 };
 
+// TODO: Move to component
 const ShoppingList = ({ mealChoices }) => {
   return (
     <div>
