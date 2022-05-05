@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   // FIXME: I only support searches right now
   const results = await Recipe
     .find({ $text: { $search: query } })
-    .limit(10)
+    .limit(100)
     .lean()
     .exec();
 
