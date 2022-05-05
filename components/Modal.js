@@ -5,7 +5,12 @@ import { Fragment } from 'react';
  * From HeadlessUI
  * https://headlessui.dev/react/dialog
  */
-export default function Modal({ isOpen, toggleModal, children }) {
+export default function Modal({
+  isOpen,
+  toggleModal,
+  buttonAction = toggleModal,
+  children,
+}) {
   if (!isOpen) return null;
 
   // const { title, ingredients, instructions } = recipe;
@@ -43,7 +48,7 @@ export default function Modal({ isOpen, toggleModal, children }) {
                     <button
                       type="button"
                       className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={toggleModal}
+                      onClick={buttonAction}
                     >
                       Got it, thanks!
                     </button>
