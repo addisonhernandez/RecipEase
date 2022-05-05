@@ -1,8 +1,9 @@
 import { useState } from 'react';
+
 import Modal from './Modal';
+import RecipeDetail from './RecipeDetail';
 
 import styles from './PantryItem.module.css';
-import RecipeDetail from './RecipeDetail';
 
 export default function RecipeItem(props) {
   const { title, ingredients } = props;
