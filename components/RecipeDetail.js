@@ -1,5 +1,3 @@
-import Link from 'next/link';
-import styles from './PantryItem.module.css';
 import { Dialog } from '@headlessui/react';
 
 export default function RecipeDetail({ title, ingredients, instructions }) {
