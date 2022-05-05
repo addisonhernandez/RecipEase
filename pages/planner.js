@@ -1,9 +1,7 @@
-import { useRef, useState } from 'react';
-import Recipe from '../models/Recipe';
-import dbConnect from '../db';
+import { useRef, useState, useEffect } from 'react';
 
 export default function Planner() {
-  const [mealChoices, setMealChoices] = useState();
+  const [mealChoices, setMealChoices] = useState([]);
 
   return (
     <>
@@ -31,88 +29,57 @@ const daysOfWeek = [
 const WeekForm = ({ setMealChoices }) => {
   const formRef = useRef();
 
-  // const [monday, setMonday] = useState('');
-  // const [tuesday, setTuesday] = useState('');
-  // const [wednesday, setWednesday] = useState('');
-  // const [thursday, setThursday] = useState('');
-  // const [friday, setFriday] = useState('');
-  // const [saturday, setSaturday] = useState('');
-  // const [sunday, setSunday] = useState('');
   const [dayOfWeek, setDayOfWeek] = useState('Monday');
+  const [recipeOptions, setRecipeOptions] = useState([]);
 
   const handleSubmit = () => {};
 
   const searchRecipes = async (query) => {
-    await dbConnect();
+    if (!query || !query.length) return;
+    try {
+      const res = await fetch(`/api/recipes/${query}`);
 
-    const results = Recipe.find();
+      if (!res.ok) {
+        throw new Error(res.status);
+      }
+
+      const { data } = await res.json();
+
+      setRecipeOptions(data);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
-    <form ref={formRef} className="flex flex-col gap-2" onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Search for a recipe"
-        onChange={(e) => searchRecipes(e.target.value)}
-      />
-      <select onChange={(e) => setDayOfWeek(e.target.value)}>
-        {daysOfWeek.map((day) => (
-          <option key={day} value={day}>
-            {day}
-          </option>
-        ))}
-      </select>
-      {/* <label>
+    <div>
+      <form
+        ref={formRef}
+        className="flex flex-col gap-2"
+        onSubmit={handleSubmit}
+      >
         <input
           type="text"
-          placeholder="Monday"
-          onChange={(e) => setMonday(e.target.value)}
+          placeholder="Search for a recipe"
+          onChange={(e) => searchRecipes(e.target.value)}
         />
-      </label>
-      <label>
-        <input
-          type="text"
-          placeholder="Tuesday"
-          onChange={(e) => setTuesday(e.target.value)}
-        />
-      </label>
-      <label>
-        <input
-          type="text"
-          placeholder="Wednesday"
-          onChange={(e) => setWednesday(e.target.value)}
-        />
-      </label>
-      <label>
-        <input
-          type="text"
-          placeholder="Thursday"
-          onChange={(e) => setThursday(e.target.value)}
-        />
-      </label>
-      <label>
-        <input
-          type="text"
-          placeholder="Friday"
-          onChange={(e) => setFriday(e.target.value)}
-        />
-      </label>
-      <label>
-        <input
-          type="text"
-          placeholder="Saturday"
-          onChange={(e) => setSaturday(e.target.value)}
-        />
-      </label>
-      <label>
-        <input
-          type="text"
-          placeholder="Sunday"
-          onChange={(e) => setSunday(e.target.value)}
-        />
-      </label> */}
-    </form>
+        <select onChange={(e) => setDayOfWeek(e.target.value)}>
+          {daysOfWeek.map((day) => (
+            <option key={day} value={day}>
+              {day}
+            </option>
+          ))}
+        </select>
+      </form>
+      <div>
+        {recipeOptions.length
+          ? recipeOptions.map((recipe) => (
+              <li key={recipe._id}>{recipe.title}</li>
+            ))
+          : null}
+      </div>
+    </div>
   );
 };
 
-const ShoppingList = () => {};
+const ShoppingList = () => <div>Shopping List</div>;
