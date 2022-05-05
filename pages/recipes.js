@@ -1,20 +1,33 @@
+import { useState } from 'react';
+
 import Layout from '../components/layout';
 import RecipeItem from '../components/RecipeItem';
 import dbConnect from '../db';
 import Recipe from '../models/Recipe';
 
-import styles from '../styles/Home.module.css';
-
 export default function Recipes({ recipes }) {
+  const [runtimeRecipes, setRuntimeRecipes] = useState([]);
+
+  const shuffle = async () => {
+    const results = await (await fetch('/api/recipes')).json();
+
+    setRuntimeRecipes(results.data);
+  }
   return (
     <>
       <div>
-        <h1 className='m-0 text-6xl text-center mt-4'>Recipes</h1>
+        <h1 className="m-0 text-6xl text-center mt-4" onClick={shuffle}>
+          Recipes
+        </h1>
       </div>
       <Layout>
-        {recipes.map((recipe) => (
-          <RecipeItem key={recipe._id} {...recipe} />
-        ))}
+        {runtimeRecipes.length
+          ? runtimeRecipes.map((recipe) => (
+              <RecipeItem key={recipe._id} {...recipe} />
+            ))
+          : recipes.map((recipe) => (
+              <RecipeItem key={recipe._id} {...recipe} />
+            ))}
       </Layout>
     </>
   );
