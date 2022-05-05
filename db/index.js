@@ -29,17 +29,13 @@ async function dbConnect() {
       bufferCommands: false,
     };
 
-    cached.promise = mongoose
-      .connect(MONGO_URI, opts)
-      .then((mongoose) => {
-        return mongoose;
-      });
+    cached.promise = mongoose.connect(MONGO_URI, opts);
   }
 
-  console.log('Connecting ...')
+  console.log('Connecting ...');
   cached.conn = await cached.promise;
 
-  console.log('Connected to MongoDB')
+  console.log('Connected to MongoDB');
 
   return cached.conn;
 }
