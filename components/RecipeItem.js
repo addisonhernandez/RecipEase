@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Modal from './Modal';
 
 import styles from './PantryItem.module.css';
+import RecipeDetail from './RecipeDetail';
 
 export default function RecipeItem(props) {
   const { title, ingredients } = props;
@@ -12,7 +13,9 @@ export default function RecipeItem(props) {
 
   return (
     <>
-      <Modal isOpen={isOpen} recipe={props} toggleModal={toggle}></Modal>
+      <Modal isOpen={isOpen} toggleModal={toggle}>
+        <RecipeDetail {...props} />
+      </Modal>
       <div className={styles.card} onClick={toggle}>
         <h2>{title}</h2>
         <div>
