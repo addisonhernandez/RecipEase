@@ -37,24 +37,6 @@ export default function Recipes({ recipes }) {
   );
 }
 
-const fetchFromAPI = async function () {
-  const requestOptions = {
-    method: 'GET',
-    redirect: 'follow',
-  };
-
-  const appId = process.env.EDAMAM_APP_ID;
-  const appKey = process.env.EDAMAM_APP_KEY;
-  const query = 'taco';
-
-  const result = await fetch(
-    `https://api.edamam.com/api/recipes/v2?type=public&q=${query}&app_id=${appId}&app_key=${appKey}`,
-    requestOptions
-  );
-
-  return (await result.json()).hits;
-};
-
 export async function getStaticProps() {
   await dbConnect();
 
