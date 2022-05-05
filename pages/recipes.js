@@ -12,11 +12,15 @@ export default function Recipes({ recipes }) {
     const results = await (await fetch('/api/recipes')).json();
 
     setRuntimeRecipes(results.data);
-  }
+  };
+
   return (
     <>
       <div>
-        <h1 className="m-0 text-6xl text-center mt-4" onClick={shuffle}>
+        <h1
+          className="m-0 text-6xl text-center mt-4 hover:decoration-[#0070f3] hover:underline hover:cursor-pointer"
+          onClick={shuffle}
+        >
           Recipes
         </h1>
       </div>
