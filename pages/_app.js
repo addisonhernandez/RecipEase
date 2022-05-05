@@ -8,6 +8,8 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <title>RecipEase</title>
+        <meta name="description" content="A tool to help build tasty meals" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <NavBar />
