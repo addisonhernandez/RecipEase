@@ -1,7 +1,7 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 
 export default function Planner() {
-  const [mealChoices, setMealChoices] = useState([]);
+  const [mealChoices, setMealChoices] = useState({});
 
   return (
     <>
@@ -9,7 +9,7 @@ export default function Planner() {
         <h1 className="m-0 text-6xl text-center mt-4">Meal Plan</h1>
       </div>
       <div className="grid grid-cols-2 gap-4 mx-8">
-        <WeekForm setMealChoices={setMealChoices} />
+        <WeekForm mealChoices={mealChoices} setMealChoices={setMealChoices} />
         <ShoppingList mealChoices={mealChoices} />
       </div>
     </>
@@ -26,7 +26,7 @@ const daysOfWeek = [
   'Sunday',
 ];
 
-const WeekForm = ({ setMealChoices }) => {
+const WeekForm = ({ mealChoices, setMealChoices }) => {
   const formRef = useRef();
 
   const [dayOfWeek, setDayOfWeek] = useState('Monday');
@@ -35,7 +35,13 @@ const WeekForm = ({ setMealChoices }) => {
   const handleSubmit = () => {};
 
   const searchRecipes = async (query) => {
-    if (!query || !query.length) return;
+    if (!query) return;
+
+    if (query.length < 3) {
+      setRecipeOptions([]);
+      return;
+    }
+
     try {
       const res = await fetch(`/api/recipes/${query}`);
 
@@ -53,6 +59,7 @@ const WeekForm = ({ setMealChoices }) => {
 
   return (
     <div>
+      <h1 className="text-xl underline">Search</h1>
       <form
         ref={formRef}
         className="flex flex-col gap-2"
@@ -66,15 +73,25 @@ const WeekForm = ({ setMealChoices }) => {
         <select onChange={(e) => setDayOfWeek(e.target.value)}>
           {daysOfWeek.map((day) => (
             <option key={day} value={day}>
-              {day}
+              {(mealChoices.hasOwnProperty(day) ? '✔️ ' : '') + day}
             </option>
           ))}
         </select>
       </form>
-      <div>
+      <div className="flex flex-col gap-1 mt-2">
         {recipeOptions.length
           ? recipeOptions.map((recipe) => (
-              <li key={recipe._id}>{recipe.title}</li>
+              <div
+                key={recipe._id}
+                onClick={() =>
+                  setMealChoices((choices) => ({
+                    ...choices,
+                    [dayOfWeek]: recipe,
+                  }))
+                }
+              >
+                {recipe.title}
+              </div>
             ))
           : null}
       </div>
@@ -82,4 +99,15 @@ const WeekForm = ({ setMealChoices }) => {
   );
 };
 
-const ShoppingList = () => <div>Shopping List</div>;
+const ShoppingList = ({ mealChoices }) => {
+  return (
+    <div>
+      <h1 className="text-xl underline">Shopping List</h1>
+      {Object.values(mealChoices).map(({ ingredients }) =>
+        ingredients.map((ingredient) => (
+          <div key={ingredient}>{ingredient}</div>
+        ))
+      )}
+    </div>
+  );
+};
